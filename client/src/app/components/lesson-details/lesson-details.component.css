@@ -1,0 +1,71 @@
+
+/* מיכל פרטי השיעור */
+.lesson-details-container {
+    top: 150px;
+    background-color: #ec8898;
+    padding: 80px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+
+
+  }
+  /* כפתור חזור */
+  .actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .actions .btn {
+    background-color: #cc0066; /* ורוד כהה */
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .actions .btn:hover {
+    background-color: #e60073; /* ורוד כהה יותר */
+  }
+  
+  /* כותרת ראשית */
+  .lesson-details-container h1 {
+    font-size: 26px;
+    color: #cc0066; /* ורוד כהה */
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  
+  /* כותרת השיעור */
+  .lesson-details-container h2 {
+    font-size: 22px;
+    color: #cc0066; /* ורוד בינוני */
+    margin-bottom: 15px;
+  }
+  
+  /* פרטי השיעור */
+  .lesson-details-container p {
+    font-size: 16px;
+    color: #993366; /* ורוד כהה */
+    margin: 10px 0;
+  }
+  
+  /* טקסט מודגש */
+  .lesson-details-container p strong {
+    color: #cc0066; /* ורוד כהה */
+    font-weight: bold;
+  }
+  
+  /* הודעת שגיאה */
+  .error-message {
+    color: #ff3366; /* אדום-ורוד */
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+  }

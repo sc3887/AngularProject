@@ -1,0 +1,17 @@
+<div class="lesson-details-container">
+    <div class="actions">
+      <button (click)="goBack()" class="btn btn-secondary">חזור</button>
+    </div>
+    <h1>פרטי שיעור</h1>
+    <div *ngIf="lesson; else noLesson">
+      <h2>{{ lesson.lessonName }}</h2>
+      <p><strong>מורה:</strong> {{ lesson.teacher }}</p>
+      <p><strong>תאריך:</strong> {{ lesson.startDate | date:'dd/MM/yyyy' }}</p>
+      <p><strong>מספר מפגשים:</strong> {{ lesson.sessions }}</p>
+      <p><strong>שעה:</strong> {{ lesson.time }}</p>
+      <p><strong>מחיר:</strong> {{ lesson.price | currency:'ILS' }}</p>
+    </div>
+    <ng-template #noLesson>
+      <p class="error-message">לא נמצאו פרטים עבור השיעור המבוקש.</p>
+    </ng-template>
+  </div>
