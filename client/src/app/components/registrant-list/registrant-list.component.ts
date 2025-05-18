@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RegistrantService } from 'src/app/services/registrant.service';
+import { RegisterantService } from '../../services/registrant.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-registrant-list',
@@ -7,60 +9,70 @@ import { RegistrantService } from 'src/app/services/registrant.service';
   styleUrls: ['./registrant-list.component.css']
 })
 export class RegistrantListComponent implements OnInit {
-  registerants: any[] = [];
-  rowData: any[] = []; // הנתונים שיוצגו בטבלה
-  constructor(private registrantService: RegistrantService) { }
+  constructor(private registrantService: RegisterantService, private router: Router) { }
+
   ngOnInit(): void {
-    //הצגת כל הנרשמות
-    this.getAllRegistrants();
+    this.getAllRegisterants();
   }
- //הצגת פרטי כל הנרשמות בתוך טבלה ע"י שימוש ב AG-GRID
- columnDefs = [
-  { headerName: 'שם מלא', field: 'fullName', sortable: true, filter: true },
-  { headerName: 'טלפון', field: 'phone', sortable: true, filter: true },
-  { headerName: 'תעודת זהות', field: 'idNumber', sortable: true, filter: true },
-  { headerName: 'מזהה שיעור', field: 'lessonId', sortable: true, filter: true },
-  { headerName: 'מחיר', field: 'price', sortable: true, filter: true },
-  { headerName: 'שולם', field: 'isPaid', sortable: true, filter: true }
-];
+
+  registrants: any[] = [];
+  rowData: any[] = [];
+
+columnDefs = [
+  {
+    headerName: 'פרטים',
+    cellRenderer: () => `<button class="details-btn">פרטים</button>`,
+    width: 100,
+    suppressMenu: true,
+    sortable: false,
+    filter: false
+  },
+  { field: 'idNumber', headerName: 'תעודת זהות', sortable: true, filter: true },
+  { field: 'phone', headerName: 'טלפון', sortable: true, filter: true },
+  { field: 'fullName', headerName: 'שם מלא', sortable: true, filter: true },
 
 
+];  
 
-  getAllRegistrants(): void {
-    this.registrantService.getAllRegistrants().subscribe(
-      (response: any[]) => {
+defaultColDef = {
+  flex: 1,
+  minWidth: 100,
+  filter: true,
+  sortable: true,
+  resizable: true
+};
+
+  getAllRegisterants() {
+    this.registrantService.getAllRegisterants().subscribe(
+      (response: any) => {
         if (response) {
-          this.registerants = response;
-          this.rowData = this.registerants;
-          console.log('Registrants fetched successfully:', this.rowData);
-          console.log('Registrants fetched successfully:', this.registerants);
+          this.registrants = response;
+          this.rowData = this.registrants;
+          console.log('Registrants:', this.registrants);
         } else {
-          this.rowData = []; // שמירת הנתונים ישירות ב-rowData
-          console.log('No registrants found');
+          console.error('No registrants found');
         }
       },
-      (error) => {
+      (error: any) => {
         console.error('Error fetching registrants:', error);
       }
     );
   }
-
-  defaultColDef = {
-    flex: 1, // כל עמודה תתפוס מקום שווה
-    minWidth: 100,
-    resizable: true, // אפשרות לשנות את גודל העמודות
-    sortable: true, // אפשרות למיין
-    filter: true // אפשרות לסנן
-  };
-
   ngAfterViewInit(): void {
-    const ariaDescription = document.querySelector('.ag-aria-description-container');
-    if (ariaDescription) {
-      ariaDescription.remove();
-    }
-  }
-  goBack(): void {
-    window.history.back();
+  const ariaDescription = document.querySelector('.ag-aria-description-container');
+  if (ariaDescription) {
+    ariaDescription.remove();
   }
 }
 
+onCellClicked(event: any) {
+  if (event.colDef.headerName === 'פרטים' && event.event.target.classList.contains('details-btn')) {
+    this.showRegistrantDetails(event.data);
+  }
+}
+
+showRegistrantDetails(registrant: any) {
+  this.router.navigate(['/registrations', registrant.idNumber]);
+}
+
+}

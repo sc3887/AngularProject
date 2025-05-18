@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LessonsService } from 'src/app/services/lessons.service';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -71,9 +72,7 @@ export class LessonListComponent implements OnInit {
     return lessonDate < today; // בדיקה אם תאריך השיעור קטן מהיום
   }
 
-  goBack(): void {
-    window.history.back();
+  goBack(){
+    this.lessonService.goBack();
   }
-  
-
 }

@@ -48,9 +48,10 @@ export class LessonDetailsComponent {
       }
     );
   }
-  goBack(): void {
-    window.history.back();
+  goBack(){
+    this.lessonService.goBack();
   }
+  
   // editLesson(): void {
   //   this.lessonService.editLesson(this.lesson).subscribe(
   //     (response) => {

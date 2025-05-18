@@ -11,12 +11,26 @@ import { AuthGuard } from './components/auth.guard';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import {AgGridModule} from 'ag-grid-angular';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+
+
+import { ModuleRegistry } from 'ag-grid-community';
+import { ClientSideRowModelModule } from 'ag-grid-community';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+ModuleRegistry.registerModules(
+  [ClientSideRowModelModule,
+]);
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'lessons', component: LessonListComponent, canActivate: [AuthGuard] },
   {path: 'lessons/:id', component: LessonDetailsComponent, canActivate: [AuthGuard] },
   { path: 'registrations', component: RegistrantListComponent, canActivate: [AuthGuard] },
+  { path: 'registrations/:id', component: RegistrantDetailsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: 'login' }
 ];
@@ -36,9 +50,15 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
     HttpClientModule,
-    AgGridModule
+    AgGridModule,
+    MatCardModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatListModule,
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

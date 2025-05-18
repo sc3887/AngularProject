@@ -1,1 +1,49 @@
-<p>registrant-details works!</p>
+<div class="registrant-details-container">
+    <div class="actions">
+      <button (click)="goBack()" class="btn btn-secondary">חזור</button>
+    </div>
+    <h1>פרטי נרשמת</h1>
+    <div *ngIf="registrant; else noregistrant">
+      <h2>{{ registrant.fullName }}</h2>
+      <p><strong>טלפון:</strong> {{ registrant.phone}}</p>
+      <p><strong>תעודת זהות:</strong> {{ registrant.idNumber }}</p>
+      <p><strong>מזהה שיעור:</strong> {{ registrant.lessonId }}</p>
+      <p><strong>מחיר:</strong> {{ registrant.price | currency:'ILS' }}</p>
+      <p><strong>האם שולם:</strong> {{ registrant.isPaid ? 'כן' : 'לא' }}</p>
+    </div>
+    <ng-template #noregistrant>
+      <p class="error-message">לא נמצאו פרטים עבור התלמידה המבוקשת.</p>
+      <button (click)="goBack()" class="btn btn-secondary">חזור</button>
+    </ng-template>
+  </div>
+<!-- 
+  <div class="registrant-details-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>פרטי נרשמת</mat-card-title>
+      <mat-card-subtitle *ngIf="registrant">{{ registrant.fullName }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content *ngIf="registrant; else noregistrant">
+      <p><strong>טלפון:</strong> {{ registrant.phone }}</p>
+      <p><strong>תעודת זהות:</strong> {{ registrant.idNumber }}</p>
+      <p><strong>מזהה שיעור:</strong> {{ registrant.lessonId }}</p>
+      <p><strong>מחיר:</strong> {{ registrant.price | currency:'ILS' }}</p>
+      <p><strong>האם שולם:</strong> {{ registrant.isPaid ? 'כן' : 'לא' }}</p>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="goBack()">חזור</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <ng-template #noregistrant>
+    <mat-card>
+      <mat-card-content>
+        <p class="error-message">לא נמצאו פרטים עבור התלמידה המבוקשת.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="warn" (click)="goBack()">חזור</button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-template>
+</div> -->

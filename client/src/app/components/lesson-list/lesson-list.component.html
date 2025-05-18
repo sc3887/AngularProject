@@ -1,7 +1,8 @@
 <h1>רשימת השיעורים</h1>
 <div class="actions">
-  <button (click)="goBack()" class="btn btn-secondary">חזור</button>
-</div><div class="gallery">
+  <button (click)="goBack()" class="btn btn-secondary">יציאה</button>
+</div>
+<div class="gallery">
     <div class="lesson-card" *ngFor="let lesson of lessons" (click)="goToLessonDetails(lesson.id)"
     [ngClass]="{'highlight': isLessonExpired(lesson.startDate)}">
       <h3>{{ lesson.lessonName }}</h3>
