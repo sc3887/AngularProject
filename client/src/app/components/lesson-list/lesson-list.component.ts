@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { LessonsService } from 'src/app/services/lessons.service';
+import { RegisterantService } from 'src/app/services/registrant.service';
 
 import Swal from 'sweetalert2';
 
@@ -12,20 +14,20 @@ import Swal from 'sweetalert2';
 export class LessonListComponent implements OnInit {
   lessons: any[] = [];
   selectedLesson: any = null;
-  
-  constructor(private lessonService: LessonsService, private router: Router) { }
+  lessonFullStatus: { [lessonId: number]: boolean } = {};
 
+  constructor(private lessonService: LessonsService, private registerantService: RegisterantService, private router: Router) { }
+  
   ngOnInit(): void {
     this.getLessons();
   }
-
-
 
   getLessons(): void {
     this.lessonService.getAllLessons().subscribe(
       (response: any[]) => {
         if (response && response.length > 0) {
           this.lessons = response;
+          this.checkIfLessonsAreFull();
           console.log('Lessons fetched successfully:', this.lessons);
         } else {
           console.log('No lessons found');
@@ -48,6 +50,18 @@ export class LessonListComponent implements OnInit {
       }
     );
   }
+
+  checkIfLessonsAreFull() {
+    this.lessons.forEach(lesson => {
+      this.registerantService.getAllRegisterantsOfLesson(lesson.id).subscribe(registerants => {
+        this.lessonFullStatus[lesson.id] = registerants.length >= 10;
+      }, error => {
+        console.error('Error fetching registrants for lesson', lesson.id, error);
+        this.lessonFullStatus[lesson.id] = false;
+      });
+    });
+  }
+
 
   goToLessonDetails(id: number): void {
     this.lessonService.getLessonById(id).subscribe(

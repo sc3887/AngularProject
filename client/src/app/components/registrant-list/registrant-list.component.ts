@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterantService } from '../../services/registrant.service';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-registrant-list',
   templateUrl: './registrant-list.component.html',

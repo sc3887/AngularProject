@@ -1,49 +1,76 @@
 const express = require('express');
 const router = express.Router();
 
-const registerants = [
-    { fullName: 'דבורה הררי', phone: '050-0123456', idNumber: '012012012', lessonId: 1, price: 100, isPaid: true },
-    { fullName: 'עליזה פרידמן', phone: '050-1112233', idNumber: '111222333', lessonId: 2, price: 120, isPaid: false },
-    { fullName: 'חנה בן דוד', phone: '050-2223344', idNumber: '222333444', lessonId: 3, price: 150, isPaid: true },
-    { fullName: 'אסתר ברזילי', phone: '050-3334455', idNumber: '333444555', lessonId: 1, price: 100, isPaid: false },
-    { fullName: 'רבקה פיין', phone: '050-4445566', idNumber: '444555666', lessonId: 2, price: 120, isPaid: true },
-    { fullName: 'נעמה הרשקוביץ', phone: '050-5556677', idNumber: '555666777', lessonId: 3, price: 150, isPaid: false },
-    { fullName: 'דליה כהנוב', phone: '050-6667788', idNumber: '666777888', lessonId: 1, price: 100, isPaid: true },
-    { fullName: 'שולמית גולדשטיין', phone: '050-7778899', idNumber: '777888999', lessonId: 2, price: 120, isPaid: false },
-    { fullName: 'איילה בן יעקב', phone: '050-8889900', idNumber: '888999000', lessonId: 3, price: 150, isPaid: true },
-    { fullName: 'נעמי צוקרמן', phone: '050-9990011', idNumber: '999000111', lessonId: 1, price: 100, isPaid: false },
-    { fullName: 'זהבה ליפשיץ', phone: '050-0001122', idNumber: '000111222', lessonId: 2, price: 120, isPaid: true },
-    { fullName: 'אביגיל לוי', phone: '050-1234567', idNumber: '123123123', lessonId: 1, price: 100, isPaid: true },
-    { fullName: 'מרים כהן', phone: '050-2345678', idNumber: '234234234', lessonId: 2, price: 120, isPaid: false },
-    { fullName: 'רות ברק', phone: '050-3456789', idNumber: '345345345', lessonId: 3, price: 150, isPaid: true },
-    { fullName: 'ציפי רוזן', phone: '050-4567890', idNumber: '456456456', lessonId: 1, price: 100, isPaid: false },
-    { fullName: 'גילה נחום', phone: '050-5678901', idNumber: '567567567', lessonId: 2, price: 120, isPaid: true },
-    { fullName: 'אסנת אורן', phone: '050-6789012', idNumber: '678678678', lessonId: 3, price: 150, isPaid: false },
-    { fullName: 'חגית גולד', phone: '050-7890123', idNumber: '789789789', lessonId: 1, price: 100, isPaid: true },
-    { fullName: 'שירה שרון', phone: '050-8901234', idNumber: '890890890', lessonId: 2, price: 120, isPaid: true },
-    { fullName: 'אורית וולף', phone: '050-9012345', idNumber: '901901901', lessonId: 3, price: 150, isPaid: false },
-    { fullName: 'דינה לוי', phone: '050-1122334', idNumber: '112112112', lessonId: 1, price: 100, isPaid: true },
-    { fullName: 'רונית כהן', phone: '050-2233445', idNumber: '223223223', lessonId: 2, price: 120, isPaid: false },
-    { fullName: 'אפרת ברק', phone: '050-3344556', idNumber: '334334334', lessonId: 3, price: 150, isPaid: true },
-    { fullName: 'ליאת רוזן', phone: '050-4455667', idNumber: '445445445', lessonId: 1, price: 100, isPaid: false },
-    { fullName: 'איילת נחום', phone: '050-5566778', idNumber: '556556556', lessonId: 2, price: 120, isPaid: true },
-    { fullName: 'שרית אורן', phone: '050-6677889', idNumber: '667667667', lessonId: 3, price: 150, isPaid: false },
-    { fullName: 'מיכל גולד', phone: '050-7788990', idNumber: '778778778', lessonId: 1, price: 100, isPaid: true },
-    { fullName: 'יעל שרון', phone: '050-8899001', idNumber: '889889889', lessonId: 2, price: 120, isPaid: true },
-    { fullName: 'חיה וולף', phone: '050-9900112', idNumber: '990990990', lessonId: 3, price: 150, isPaid: false },
-    { fullName: 'אלישבע הררי', phone: '050-1011122', idNumber: '101101101', lessonId: 1, price: 100, isPaid: true },
-    { fullName: 'טובה לוי', phone: '050-2022233', idNumber: '202202202', lessonId: 2, price: 120, isPaid: false },
-    { fullName: 'נעמה כהן', phone: '050-3033344', idNumber: '303303303', lessonId: 3, price: 150, isPaid: true },
-    { fullName: 'עליזה ברק', phone: '050-4044455', idNumber: '404404404', lessonId: 1, price: 100, isPaid: false },
-    { fullName: 'דליה רוזן', phone: '050-5055566', idNumber: '505505505', lessonId: 2, price: 120, isPaid: true },
-    { fullName: 'שולמית נחום', phone: '050-6066677', idNumber: '606606606', lessonId: 3, price: 150, isPaid: false },
-    { fullName: 'איילה אורן', phone: '050-7077788', idNumber: '707707707', lessonId: 1, price: 100, isPaid: true },
-    { fullName: 'נעמי גולד', phone: '050-8088899', idNumber: '808808808', lessonId: 2, price: 120, isPaid: false },
-    { fullName: 'זהבה שרון', phone: '050-9099900', idNumber: '909909909', lessonId: 3, price: 150, isPaid: true }
-  ];   
+const registrants = [
+  { fullName: 'אביגיל לוי', phone: '050-1234567', idNumber: '123456789', lessonId: 1, price: 1200, paid: true },
+  { fullName: 'אורית כהן', phone: '050-2345678', idNumber: '987654321', lessonId: 2, price: 1000, paid: false },
+  { fullName: 'גלית ישראלי', phone: '050-3456789', idNumber: '111222333', lessonId: 3, price: 1500, paid: true },
+  { fullName: 'ליאת ברקוביץ', phone: '050-4567890', idNumber: '444555666', lessonId: 4, price: 800, paid: true },
+  { fullName: 'אפרת דוידי', phone: '050-5678901', idNumber: '777888999', lessonId: 5, price: 1000, paid: false },
+  { fullName: 'ענת פרידמן', phone: '050-6789012', idNumber: '222333444', lessonId: 6, price: 1200, paid: true },
+  { fullName: 'שירה מלמד', phone: '050-7890123', idNumber: '888999000', lessonId: 7, price: 1000, paid: true },
+  { fullName: 'דפנה רוזנבלום', phone: '050-8901234', idNumber: '999000111', lessonId: 8, price: 1400, paid: false },
+  { fullName: 'אילנה גולן', phone: '050-9012345', idNumber: '333444555', lessonId: 9, price: 600, paid: true },
+  { fullName: 'רבקה בן דוד', phone: '050-0123456', idNumber: '101202303', lessonId: 10, price: 1000, paid: false },
+  { fullName: 'אביטל צור', phone: '050-1122334', idNumber: '445566778', lessonId: 11, price: 1200, paid: true },
+  { fullName: 'חגית כהנוב', phone: '050-2233445', idNumber: '556677889', lessonId: 12, price: 800, paid: true },
+  { fullName: 'אדוה שטרן', phone: '050-3344556', idNumber: '667788990', lessonId: 13, price: 1000, paid: false },
+  { fullName: 'שני פיין', phone: '050-4455667', idNumber: '778899001', lessonId: 1, price: 1200, paid: true },
+  { fullName: 'אורנה הרשקוביץ', phone: '050-5566778', idNumber: '889900112', lessonId: 2, price: 1000, paid: true },
+  { fullName: 'נועה ברזילי', phone: '050-6677889', idNumber: '990011223', lessonId: 3, price: 1500, paid: false },
+  { fullName: 'מאיה בן יעקב', phone: '050-7788990', idNumber: '001122334', lessonId: 4, price: 800, paid: true },
+  { fullName: 'הילה צוקרמן', phone: '050-8899001', idNumber: '112233445', lessonId: 5, price: 1000, paid: false },
+  { fullName: 'יערה ליפשיץ', phone: '050-9900112', idNumber: '223344556', lessonId: 6, price: 1200, paid: true },
+  { fullName: 'לירון גולדשטיין', phone: '050-1011122', idNumber: '334455667', lessonId: 7, price: 1000, paid: true },
+  { fullName: 'אורלי דגן', phone: '050-1212121', idNumber: '445566778', lessonId: 8, price: 1400, paid: false },
+  { fullName: 'שירן לוי', phone: '050-2323232', idNumber: '556677889', lessonId: 9, price: 600, paid: true },
+  { fullName: 'איילת רוזן', phone: '050-3434343', idNumber: '667788990', lessonId: 10, price: 1000, paid: true },
+  { fullName: 'דנה ברק', phone: '050-4545454', idNumber: '778899001', lessonId: 11, price: 1200, paid: false },
+  { fullName: 'קרן נחום', phone: '050-5656565', idNumber: '889900112', lessonId: 12, price: 800, paid: true },
+  { fullName: 'אור ברקוביץ', phone: '050-6767676', idNumber: '990011223', lessonId: 13, price: 1000, paid: true },
+  { fullName: 'תמר גולד', phone: '050-7878787', idNumber: '001122334', lessonId: 1, price: 1200, paid: false },
+  { fullName: 'ליאורה שרון', phone: '050-8989898', idNumber: '112233445', lessonId: 2, price: 1000, paid: true },
+  { fullName: 'אביגיל וולף', phone: '050-9090909', idNumber: '223344556', lessonId: 3, price: 1500, paid: true },
+  { fullName: 'אילנה הררי', phone: '050-1112223', idNumber: '334455667', lessonId: 4, price: 800, paid: false },
+  { fullName: 'רונית צור', phone: '050-2223334', idNumber: '445566778', lessonId: 5, price: 1000, paid: true },
+  { fullName: 'אביטל כהן', phone: '050-3334445', idNumber: '556677889', lessonId: 6, price: 1200, paid: true },
+  { fullName: 'אורית לוי', phone: '050-4445556', idNumber: '667788990', lessonId: 7, price: 1000, paid: false },
+  { fullName: 'גלית רוזן', phone: '050-5556667', idNumber: '778899001', lessonId: 8, price: 1400, paid: true },
+  { fullName: 'ליאת ברק', phone: '050-6667778', idNumber: '889900112', lessonId: 9, price: 600, paid: true },
+  { fullName: 'אפרת נחום', phone: '050-7778889', idNumber: '990011223', lessonId: 10, price: 1000, paid: false },
+  { fullName: 'ענת אורן', phone: '050-8889990', idNumber: '001122334', lessonId: 11, price: 1200, paid: true },
+  { fullName: 'שירה גולד', phone: '050-9991011', idNumber: '112233445', lessonId: 12, price: 800, paid: true },
+  { fullName: 'דפנה שרון', phone: '050-1011123', idNumber: '223344556', lessonId: 13, price: 1000, paid: false },
+  { fullName: 'אילנה וולף', phone: '050-1122335', idNumber: '334455667', lessonId: 1, price: 1200, paid: true },
+  { fullName: 'רונית לוי', phone: '050-1111111', idNumber: '123123123', lessonId: 1, price: 1200, paid: false },
+  { fullName: 'דנה כהן', phone: '050-2222222', idNumber: '234234234', lessonId: 1, price: 1200, paid: true },
+  { fullName: 'יעל ישראלי', phone: '050-3333333', idNumber: '345345345', lessonId: 1, price: 1200, paid: false },
+  { fullName: 'נועה ברק', phone: '050-4444444', idNumber: '456456456', lessonId: 1, price: 1200, paid: true },
+  { fullName: 'הילה דגן', phone: '050-5555555', idNumber: '567567567', lessonId: 1, price: 1200, paid: true },
+  { fullName: 'אורית שרון', phone: '050-6666666', idNumber: '678678678', lessonId: 1, price: 1200, paid: false },
+  { fullName: 'אביטל נחום', phone: '050-7777777', idNumber: '789789789', lessonId: 1, price: 1200, paid: true },
+  { fullName: 'רבקה הררי', phone: '050-2233446', idNumber: '445566778', lessonId: 2, price: 1000, paid: true },
+  { fullName: 'אביגיל צור', phone: '050-3344557', idNumber: '556677889', lessonId: 3, price: 1500, paid: false },
+  { fullName: 'חגית כהן', phone: '050-4455668', idNumber: '667788990', lessonId: 4, price: 800, paid: true },
+  { fullName: 'אדוה לוי', phone: '050-5566779', idNumber: '778899001', lessonId: 5, price: 1000, paid: false },
+  { fullName: 'שני רוזן', phone: '050-6677880', idNumber: '889900112', lessonId: 6, price: 1200, paid: true },
+  { fullName: 'אור ברק', phone: '050-7788991', idNumber: '990011223', lessonId: 7, price: 1000, paid: true }
+];
+
+
   router.get('/', (req, res) => {
     res.json(registerants);
   });
+  router.get('/lesson/:lessonId', (req, res) => {
+    const lessonId = parseInt(req.params.lessonId);
+    const lessonRegistrants = registrants.filter(r => r.lessonId === lessonId);
+    if (lessonRegistrants.length > 0) {
+        res.json(lessonRegistrants);
+    } else {
+        res.status(404).json({ error: 'No registrants found for this lesson' });
+    }
+});
+
     router.get('/:idNumber', (req, res) => {
         const registerantId = req.params.idNumber;
         const registerant = registerants.find(r => r.idNumber === registerantId);

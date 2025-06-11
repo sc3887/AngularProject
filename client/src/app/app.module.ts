@@ -15,11 +15,26 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
-
-
 import { ModuleRegistry } from 'ag-grid-community';
 import { ClientSideRowModelModule } from 'ag-grid-community';
+
+
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+// import { ModuleRegistry } from 'ag-grid-community';
+// import { ClientSideRowModelModule } from 'ag-grid-community/client-side-row-model';
+// import { SetFilterModule } from 'ag-grid-community/set-filter';
+// import { MenuModule } from 'ag-grid-community/menu';
+// import { ColumnsToolPanelModule } from 'ag-grid-community/column-tool-panel';
+// import { FiltersToolPanelModule } from 'ag-grid-community/filter-tool-panel';
+
+// ModuleRegistry.registerModules([
+//   ClientSideRowModelModule,
+//   SetFilterModule,
+//   MenuModule,
+//   ColumnsToolPanelModule,
+//   FiltersToolPanelModule
+// ]);
+
 
 ModuleRegistry.registerModules(
   [ClientSideRowModelModule,

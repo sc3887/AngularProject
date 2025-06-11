@@ -7,5 +7,6 @@
     [ngClass]="{'highlight': isLessonExpired(lesson.startDate)}">
       <h3>{{ lesson.lessonName }}</h3>
       <p>מורה: {{ lesson.teacher }}</p>
+      <p *ngIf="lessonFullStatus[lesson.id]">קבוצה מלאה</p> 
     </div>
   </div>

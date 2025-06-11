@@ -15,6 +15,9 @@ export class RegisterantService {
     return this.http.get<any>(`http://localhost:3000/api/registerant/${id}`);
   }
 
+  getAllRegisterantsOfLesson(lessonId: number): Observable<Array<any>> {
+    return this.http.get<any[]>(`http://localhost:3000/api/registerant/lesson/${lessonId}`);
+  }
   goBack(): void {
     window.history.back();
   }
